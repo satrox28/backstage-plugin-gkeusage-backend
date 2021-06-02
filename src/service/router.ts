@@ -77,6 +77,7 @@ const credential = options.config.getString(
       namespace,
       labelKey,
       labelValue,
+      credential,
     );
 
     response.send(usage);

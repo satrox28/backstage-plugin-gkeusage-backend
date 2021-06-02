@@ -34,8 +34,12 @@ export async function createRouter(
 
   logger.info('Initializing GKE usage metering backend');
   const billingTable = options.config.getString(
-    'gkeUsageMetering.billingTable',
+    'gkeUsage.billingTable',
   );
+
+const credential = options.config.getString(
+    'gkeUsage.google_application_credentials'
+)
 
   const router = Router();
   router.use(express.json());
@@ -54,6 +58,7 @@ export async function createRouter(
       labelKey,
       labelValue,
       billingTable,
+      credential,
     );
 
     response.send(cost);

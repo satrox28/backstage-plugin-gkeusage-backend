@@ -5,11 +5,12 @@ export async function costQuery(
   labelKey: string,
   labelValue: string,
   billingTable: string,
+  credential: string,
 ) {
   const { BigQuery } = require('@google-cloud/bigquery');
 
   const authOptions = {
-    keyFilename: './es-standalone-cb21-39a548d04291.json',
+    keyFilename: credential,
     projectId: projectID,
   };
   const bigquery = new BigQuery(authOptions);

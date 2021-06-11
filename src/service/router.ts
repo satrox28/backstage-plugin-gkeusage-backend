@@ -33,13 +33,11 @@ export async function createRouter(
   const logger = options.logger;
 
   logger.info('Initializing GKE usage metering backend');
-  const billingTable = options.config.getString(
-    'gkeUsage.billingTable',
-  );
+  const billingTable = options.config.getString('gkeUsage.billingTable');
 
-const credential = options.config.getString(
-    'gkeUsage.google_application_credentials'
-)
+  const credential = options.config.getString(
+    'gkeUsage.google_application_credentials',
+  );
 
   const router = Router();
   router.use(express.json());
@@ -50,6 +48,7 @@ const credential = options.config.getString(
     const namespace: any = request.query.namespace;
     const labelKey: any = request.query.labelKey;
     const labelValue: any = request.query.labelValue;
+    const maxAge: any = request.query.maxAge;
 
     const cost = await costQuery(
       projectID,
@@ -59,6 +58,7 @@ const credential = options.config.getString(
       labelValue,
       billingTable,
       credential,
+      maxAge,
     );
 
     response.send(cost);
@@ -70,6 +70,7 @@ const credential = options.config.getString(
     const namespace: any = request.query.namespace;
     const labelKey: any = request.query.labelKey;
     const labelValue: any = request.query.labelValue;
+    const maxAge: any = request.query.maxAge;
 
     const usage = await usageQuery(
       projectID,
@@ -78,6 +79,7 @@ const credential = options.config.getString(
       labelKey,
       labelValue,
       credential,
+      maxAge,
     );
 
     response.send(usage);

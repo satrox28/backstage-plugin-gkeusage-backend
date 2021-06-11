@@ -1,3 +1,5 @@
+import { BigQuery } from '@google-cloud/bigquery';
+
 export async function usageQuery(
   projectID: string,
   dataSet: string,
@@ -5,25 +7,23 @@ export async function usageQuery(
   labelKey: string,
   labelValue: string,
   credential: string,
+  maxAge: string,
 ) {
-  const { BigQuery } = require('@google-cloud/bigquery');
-
   const authOptions = {
     keyFilename: credential,
     projectId: projectID,
   };
   const bigquery = new BigQuery(authOptions);
 
-  const usageTable = projectID + '.' + dataSet + '.gke_cluster_resource_usage';
+  const usageTable = `${projectID}.${dataSet}.gke_cluster_resource_usage`;
 
-  const consumptionTable =
-    projectID + '.' + dataSet + '.gke_cluster_resource_consumption';
+  const consumptionTable = `${projectID}.${dataSet}.gke_cluster_resource_consumption`;
 
   const query = `
     WITH
   constraints AS (
   SELECT
-    TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 30 DAY) AS min_time,
+    TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL ${maxAge} DAY) AS min_time,
     CURRENT_TIMESTAMP() AS max_time,
     "${projectID}" AS project_id ),
   request_based_amount_by_namespace AS (
@@ -124,7 +124,7 @@ GROUP BY
 
   const cost: any = [];
 
-  rows.forEach(function (row: any) {
+  rows.forEach(function addrows(row: any) {
     cost.push(row);
   });
 

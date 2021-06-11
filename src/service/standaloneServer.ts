@@ -52,21 +52,6 @@ export async function startStandaloneServer(
   app.use(errorHandler());
 
   return app;
-
-  // const logger = options.logger.child({ service: 'gkeusagemetrics-backend' });
-  // logger.debug('Starting application server...');
-  // const router = await createRouter({
-  //   logger,
-  // });
-
-  // const service = createServiceBuilder(module)
-  //   .enableCors({ origin: 'http://localhost:3000' })
-  //   .addRouter('/gkeusagemetrics', router);
-
-  // return await service.start().catch(err => {
-  //   logger.error(err);
-  //   process.exit(1);
-  // });
 }
 
 module.hot?.accept();

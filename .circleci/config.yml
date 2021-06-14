@@ -38,6 +38,9 @@ jobs:
           command: envsubst < package.json > package.json.tmp && mv package.json.tmp package.json 
       - yarn-install-pretty-lint-tsc-build
       - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ./.npmrc
+      - run:
           name: publish
           command: yarn publish 
 

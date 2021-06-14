@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-import { errorHandler } from '@backstage/backend-common';
-import { Config } from '@backstage/config';
-import express from 'express';
-import Router from 'express-promise-router';
-import { Logger } from 'winston';
-import { costQuery } from './cost';
-import { usageQuery } from './usage';
+import { errorHandler } from "@backstage/backend-common";
+import { Config } from "@backstage/config";
+import express from "express";
+import Router from "express-promise-router";
+import { Logger } from "winston";
+import { costQuery } from "./cost";
+import { usageQuery } from "./usage";
 
 export interface RouterOptions {
   logger: Logger;
@@ -28,21 +28,21 @@ export interface RouterOptions {
 }
 
 export async function createRouter(
-  options: RouterOptions,
+  options: RouterOptions
 ): Promise<express.Router> {
   const logger = options.logger;
 
-  logger.info('Initializing GKE usage metering backend');
-  const billingTable = options.config.getString('gkeUsage.billingTable');
+  logger.info("Initializing GKE usage metering backend");
+  const billingTable = options.config.getString("gkeUsage.billingTable");
 
   const credential = options.config.getString(
-    'gkeUsage.google_application_credentials',
+    "gkeUsage.google_application_credentials"
   );
 
   const router = Router();
   router.use(express.json());
 
-  router.get('/cost', async (request, response) => {
+  router.get("/cost", async (request, response) => {
     const projectID: any = request.query.projectid;
     const dataSet: any = request.query.dataset;
     const namespace: any = request.query.namespace;
@@ -58,13 +58,13 @@ export async function createRouter(
       labelValue,
       billingTable,
       credential,
-      maxAge,
+      maxAge
     );
 
     response.send(cost);
   });
 
-  router.get('/usage', async (request, response) => {
+  router.get("/usage", async (request, response) => {
     const projectID: any = request.query.projectid;
     const dataSet: any = request.query.dataset;
     const namespace: any = request.query.namespace;
@@ -79,15 +79,15 @@ export async function createRouter(
       labelKey,
       labelValue,
       credential,
-      maxAge,
+      maxAge
     );
 
     response.send(usage);
   });
 
-  router.get('/health', (_, response) => {
-    logger.info('PONG!');
-    response.send({ status: 'ok' });
+  router.get("/health", (_, response) => {
+    logger.info("PONG!");
+    response.send({ status: "ok" });
   });
   router.use(errorHandler());
   return router;

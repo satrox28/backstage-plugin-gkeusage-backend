@@ -1,4 +1,4 @@
-import { BigQuery } from '@google-cloud/bigquery';
+import { BigQuery } from "@google-cloud/bigquery";
 
 export async function costQuery(
   projectID: string,
@@ -8,7 +8,7 @@ export async function costQuery(
   labelValue: string,
   billingTable: string,
   credential: string,
-  maxAge: string,
+  maxAge: string
 ) {
   const authOptions = {
     keyFilename: credential,

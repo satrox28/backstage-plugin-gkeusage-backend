@@ -24,8 +24,7 @@ export async function usageQuery(
   constraints AS (
   SELECT
     TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL ${maxAge} DAY) AS min_time,
-    CURRENT_TIMESTAMP() AS max_time,
-    "${projectID}" AS project_id ),
+    CURRENT_TIMESTAMP() AS max_time),
   request_based_amount_by_namespace AS (
   SELECT
     namespace,
@@ -42,7 +41,7 @@ export async function usageQuery(
   ON
     requested_resource_usage.start_time >= constraints.min_time
     AND requested_resource_usage.end_time <= constraints.max_time
-    AND requested_resource_usage.project.id = constraints.project_id
+  -- AND requested_resource_usage.project.id = constraints.project_id
   GROUP BY
     namespace,
     key,
@@ -65,7 +64,7 @@ export async function usageQuery(
   ON
     consumed_resource_usage.start_time >= constraints.min_time
     AND consumed_resource_usage.end_time <= constraints.max_time
-    AND consumed_resource_usage.project.id = constraints.project_id
+  --  AND consumed_resource_usage.project.id = constraints.project_id
   GROUP BY
     key,
     value,

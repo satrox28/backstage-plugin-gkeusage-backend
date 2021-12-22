@@ -52,8 +52,7 @@ export async function costQuery(
     FROM
     \`${billingTable}\`
    
-    WHERE
-     project.id = project_id
+    -- WHERE project.id = project_id
     GROUP BY
       date,
       sku_id,

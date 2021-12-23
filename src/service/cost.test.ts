@@ -4,15 +4,8 @@ import express from "express";
 import { ConfigReader } from "@backstage/config";
 import { getVoidLogger } from "@backstage/backend-common";
 import * as CostService from "./cost";
+import { QueryString } from "../test/query";
 
-export const QueryString = {
-  projectid: "projectID",
-  dataset: "gke_usage_metrics",
-  labelKey: "app",
-  labelValue: "service1",
-  namespace: "default",
-  maxAge: "2",
-};
 const mockCostData: any = [
   {
     date: {

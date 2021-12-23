@@ -4,7 +4,7 @@ import express from "express";
 import { ConfigReader } from "@backstage/config";
 import { getVoidLogger } from "@backstage/backend-common";
 import * as UsageService from "./usage";
-import { QueryString } from "./cost.test";
+import { QueryString } from "../test/query";
 
 const mockUsageData: any = [
   {

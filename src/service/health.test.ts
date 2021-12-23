@@ -29,5 +29,4 @@ describe("createRouter", () => {
       expect(response.body).toEqual({ status: "ok" });
     });
   });
-
 });

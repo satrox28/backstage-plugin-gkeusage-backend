@@ -21,7 +21,8 @@ export async function startStandaloneServer(
     config: new ConfigReader({
       gkeUsage: {
         billingTable: process.env.APP_CONFIG_gkeUsage_billingTable,
-        google_application_credentials: process.env.GOOGLE_APPLICATION_CREDENTIALS,
+        google_application_credentials:
+          process.env.GOOGLE_APPLICATION_CREDENTIALS,
       },
     }),
   });

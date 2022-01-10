@@ -20,11 +20,11 @@
     "clean": "backstage-cli clean"
   },
   "dependencies": {
-    "@backstage/backend-common": "^0.9.14",
+    "@backstage/backend-common": "^0.10.0",
     "@backstage/config": "^0.1.11",
     "@google-cloud/bigquery": "^5.6.0",
-    "@spotify/eslint-config-base": "^10.0.0",
-    "@spotify/eslint-config-typescript": "^10.0.0",
+    "@spotify/eslint-config-typescript": "^12.0.0",
+    "@spotify/eslint-config-base": "^12.0.0",
     "@types/express": "^4.17.12",
     "@typescript-eslint/eslint-plugin": "^4.26.1",
     "@typescript-eslint/parser": "^4.26.1",
@@ -32,13 +32,13 @@
     "cors": "^2.8.5",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.4",
-    "eslint-plugin-jest": "^24.3.6",
+    "eslint-plugin-jest": "^25.3.0",
     "eslint-plugin-monorepo": "^0.3.2",
     "express": "^4.17.1",
     "express-promise-router": "^4.1.0",
     "helmet": "^4.6.0",
     "winston": "^3.3.3",
-    "yn": "^4.0.0"
+    "yn": "^5.0.0"
   },
   "devDependencies": {
     "@backstage/cli": "^0.10.1",

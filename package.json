@@ -36,7 +36,7 @@
     "eslint-plugin-monorepo": "^0.3.2",
     "express": "^4.17.1",
     "express-promise-router": "^4.1.0",
-    "helmet": "^4.6.0",
+    "helmet": "^5.0.2",
     "winston": "^3.3.3",
     "yn": "^5.0.0"
   },

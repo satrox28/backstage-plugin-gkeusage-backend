@@ -30,7 +30,7 @@ yarn add @bestseller/backstage-plugin-gkeusage-backend
 Create a new file named `packages/backend/src/plugins/gkeusage.ts`, and add the following to it
 
 ```
-import { createRouter } from '@internal/backstage-plugin-gkeusage-backend';
+import { createRouter } from '@bestsellerit/backstage-plugin-gkeusage-backend';
 import { Router } from 'express';
 import { PluginEnvironment } from '../types';
 

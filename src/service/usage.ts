@@ -2,6 +2,7 @@ import { BigQuery } from "@google-cloud/bigquery";
 
 export async function usageQuery(
   projectID: string,
+  jobprojectID: string,
   dataSet: string,
   namespace: string,
   labelKey: string,
@@ -11,8 +12,11 @@ export async function usageQuery(
 ) {
   const authOptions = {
     keyFilename: credential,
-    projectId: projectID,
+    projectId: jobprojectID,
   };
+
+
+
   const bigquery = new BigQuery(authOptions);
 
   const usageTable = `${projectID}.${dataSet}.gke_cluster_resource_usage`;
@@ -116,7 +120,9 @@ GROUP BY
   };
 
   // Run the query as a job
+
   const [job] = await bigquery.createQueryJob(options);
+
 
   // Wait for the query to finish
   const [rows] = await job.getQueryResults();

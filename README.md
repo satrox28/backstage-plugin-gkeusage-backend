@@ -11,7 +11,7 @@ The plugin requires configuration in the Backstage app-config.yaml to connect go
 ```yaml
 gkeUsage:
   billingTable: billingProjectId.billingDataSetId.billingTableId
-  jobprojectId: bigquery-job-projectid
+  jobprojectId: ${GOOGLE_PROJECT_ID} # Optional, if set Bigquery job will be executed on this Google project instead of Dataset project.
   google_application_credentials:
     $env: GOOGLE_APPLICATION_CREDENTIALS
 

@@ -16,6 +16,9 @@ commands:
           name: type checking and declarations
           command: yarn tsc
       - run:
+          name: testing
+          command: yarn test
+      - run:
           name: build package
           command: |
             yarn build  

@@ -1,10 +1,10 @@
-import request from "supertest";
-import { createRouter } from "./router";
-import express from "express";
-import { ConfigReader } from "@backstage/config";
 import { getVoidLogger } from "@backstage/backend-common";
-import * as CostService from "./cost";
+import { ConfigReader } from "@backstage/config";
+import express from "express";
+import request from "supertest";
 import { QueryString } from "../test/query";
+import * as CostService from "./cost";
+import { createRouter } from "./router";
 
 const mockCostData: any = [
   {
@@ -49,9 +49,8 @@ describe("createRouter", () => {
       logger: getVoidLogger(),
       config: new ConfigReader({
         gkeUsage: {
-          billingTable: process.env.APP_CONFIG_gkeUsage_billingTable,
-          google_application_credentials:
-            process.env.GOOGLE_APPLICATION_CREDENTIALS,
+          billingTable: "projectid.datasetid.tableid",
+          google_application_credentials: "./path/to/creds.json",
         },
       }),
     });

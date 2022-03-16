@@ -20,9 +20,8 @@ export async function startStandaloneServer(
     logger,
     config: new ConfigReader({
       gkeUsage: {
-        billingTable: process.env.APP_CONFIG_gkeUsage_billingTable,
-        google_application_credentials:
-          process.env.GOOGLE_APPLICATION_CREDENTIALS,
+        billingTable: "projectid.datasetid.tableid",
+        google_application_credentials: "./path/to/creds.json",
       },
     }),
   });

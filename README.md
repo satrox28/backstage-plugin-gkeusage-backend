@@ -11,7 +11,8 @@ The plugin requires configuration in the Backstage app-config.yaml to connect go
 ```yaml
 gkeUsage:
   billingTable: billingProjectId.billingDataSetId.billingTableId
-  google_application_credentials: 
+  jobprojectId: ${GOOGLE_PROJECT_ID} # Optional, if set Bigquery job will be executed on this Google project instead of Dataset project.
+  google_application_credentials:
     $env: GOOGLE_APPLICATION_CREDENTIALS
 
 ```
@@ -59,4 +60,3 @@ After you start the backend (e.g. using `yarn start-backend` from the repo root)
 # Note the extra /api here
 curl localhost:7000/api/gkeusage/health
 This should return {"status":"ok"} like before. Success!
-

@@ -2,6 +2,7 @@ import { BigQuery } from "@google-cloud/bigquery";
 
 export async function costQuery(
   projectID: string,
+  jobprojectID: string,
   dataSet: string,
   namespace: string,
   labelKey: string,
@@ -12,7 +13,7 @@ export async function costQuery(
 ) {
   const authOptions = {
     keyFilename: credential,
-    projectId: projectID,
+    projectId: jobprojectID,
   };
   const bigquery = new BigQuery(authOptions);
 
@@ -21,7 +22,7 @@ export async function costQuery(
   const query = `
   DECLARE drilldown_label STRING DEFAULT '${labelKey}';
   DECLARE project_id STRING default "${projectID}";
-  
+
   SELECT
     DATE(start_time) as date,
     resource_usage.cluster_name,
@@ -37,10 +38,10 @@ export async function costQuery(
     gcp_billing_export.currency
   FROM
     \`${clusterResource}\` AS resource_usage
-  
+
   -- select only workloads matching the defined "drilldown_label"
     CROSS JOIN UNNEST(labels) AS label ON label.key=drilldown_label
-  
+
   -- join with billing table to get pricing information and sku description
     LEFT JOIN (
     SELECT
@@ -51,7 +52,7 @@ export async function costQuery(
       currency
     FROM
     \`${billingTable}\`
-   
+
     -- WHERE project.id = project_id
     GROUP BY
       date,
@@ -60,7 +61,7 @@ export async function costQuery(
       currency) AS gcp_billing_export
     ON DATE(resource_usage.start_time) = gcp_billing_export.date AND resource_usage.sku_id = gcp_billing_export.sku_id
   WHERE namespace = '${namespace}' AND value ='${labelValue}' AND date  > DATE(TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL ${maxAge} DAY))
-  
+
   GROUP BY
     date,
     cluster_name,
@@ -72,7 +73,7 @@ export async function costQuery(
     sku_description,
     usage_unit,
     currency
-  
+
   ORDER BY
     date,
     cluster_name,

@@ -15,8 +15,6 @@ export async function usageQuery(
     projectId: jobprojectID,
   };
 
-
-
   const bigquery = new BigQuery(authOptions);
 
   const usageTable = `${projectID}.${dataSet}.gke_cluster_resource_usage`;
@@ -122,7 +120,6 @@ GROUP BY
   // Run the query as a job
 
   const [job] = await bigquery.createQueryJob(options);
-
 
   // Wait for the query to finish
   const [rows] = await job.getQueryResults();

@@ -35,8 +35,9 @@ export async function createRouter(
   logger.info("Initializing GKE usage metering backend");
   const billingTable = options.config.getString("gkeUsage.billingTable");
 
-  let jobprojectID:any = options.config.getOptionalString("gkeUsage.jobprojectId")!;
-
+  let jobprojectID: any = options.config.getOptionalString(
+    "gkeUsage.jobprojectId"
+  )!;
 
   const credential = options.config.getString(
     "gkeUsage.google_application_credentials"
@@ -46,7 +47,6 @@ export async function createRouter(
   router.use(express.json());
 
   router.get("/cost", async (request, response) => {
-
     const projectID: any = request.query.projectid;
 
     const dataSet: any = request.query.dataset;
@@ -55,7 +55,6 @@ export async function createRouter(
     const labelValue: any = request.query.labelValue;
     const maxAge: any = request.query.maxAge;
     jobprojectID = jobprojectID ? jobprojectID : projectID;
-
 
     const cost = await costQuery(
       projectID,
